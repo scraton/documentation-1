@@ -1,9 +1,18 @@
 <template>
-  <tabs type="border-card">
-    <tab v-for="sample in samples" :key="sample.language" :label="sample.label">
-      <div v-html="sample.code" />
-    </tab>
-  </tabs>
+  <div>
+    <tabs v-if="samples" type="border-card">
+      <tab
+        v-for="sample in samples"
+        :key="sample.language"
+        :label="sample.label"
+      >
+        <div v-html="sample.code" />
+      </tab>
+    </tabs>
+    <tabs v-else type="border-card">
+      No example found
+    </tabs>
+  </div>
 </template>
 
 <script>
@@ -13,7 +22,7 @@ export default {
   props: {
     id: {
       type: String,
-      default: undefined,
+      default: '',
     },
   },
   data() {

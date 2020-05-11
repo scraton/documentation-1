@@ -1,3 +1,5 @@
+// TEMPORARY
+// Until real fetching is done
 const javascript = {
   label: 'javascript',
   get_index_1: `client.getIndex('movie').show()`,
