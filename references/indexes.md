@@ -12,10 +12,7 @@ List all [indexes](/guides/main_concepts/indexes.md).
 
 ### Example
 
-```bash
-$ curl \
-  -X GET 'http://localhost:7700/indexes'
-```
+<code-samples id='get_index_1' />
 
 #### Response: `200 Ok`
 
@@ -90,14 +87,7 @@ This route takes as parameter an unique `uid` and **optionally** the [primary ke
 
 ### Example
 
-```bash
-$ curl \
-  -X POST 'http://localhost:7700/indexes' \
-  --data '{
-    "uid": "movies",
-    "primaryKey": "movie_id"
-  }'
-```
+<code-samples id='create_index_1' />
 
 #### Response: `201 created`
 
