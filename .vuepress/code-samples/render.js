@@ -22,15 +22,18 @@ module.exports = function(fetchedSamples) {
       ]
     }
   **/
-  return Object.keys(fetchedSamples).reduce((acc, language) => {
-    for (const sampleId in fetchedSamples[language]) {
-      const previousSamples = acc[sampleId] ? acc[sampleId] : []
+  return fetchedSamples.reduce((acc, languageSample) => {
+    for (const sampleId in languageSample.samples) {
+      const previousSamples = acc[sampleId] || []
       acc[sampleId] = [
         ...previousSamples,
         {
-          language, // markdown code block language highlight ex: ```javascript ````
-          label: fetchedSamples[language].label, // name of the tab ex: curl
-          code: renderCodeSample(fetchedSamples[language][sampleId], language), // code rendered in HTML
+          language: languageSample.language, // markdown code block language highlight ex: ```javascript ````
+          label: languageSample.label, // name of the tab ex: curl
+          code: renderCodeSample(
+            languageSample.samples[sampleId],
+            languageSample.language
+          ), // code rendered in HTML
         },
       ]
     }

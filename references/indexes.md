@@ -12,7 +12,7 @@ List all [indexes](/guides/main_concepts/indexes.md).
 
 ### Example
 
-<code-samples id='get_index_1' />
+<code-samples id='list_all_indexes_1' />
 
 #### Response: `200 Ok`
 
@@ -47,10 +47,7 @@ Get information about an [index](/guides/main_concepts/indexes.md).
 
 ### Example
 
-```bash
-$ curl \
-  -X GET 'http://localhost:7700/indexes/movies'
-```
+<code-samples id='get_one_index_1' />
 
 #### Response: `200 Ok`
 
@@ -87,7 +84,7 @@ This route takes as parameter an unique `uid` and **optionally** the [primary ke
 
 ### Example
 
-<code-samples id='create_index_1' />
+<code-samples id='create_an_index_1' />
 
 #### Response: `201 created`
 
@@ -125,13 +122,7 @@ The `primaryKey` can be added if it does not already exist (to know if it has be
 
 ### Example
 
-```bash
-$ curl \
-  -X PUT 'http://localhost:7700/indexes/movie_review' \
-  --data '{
-      "primaryKey" : "movie_review_id"
-  }'
-```
+<code-samples id='update_an_index_1' />
 
 #### Response: `200 Ok`
 
@@ -158,9 +149,6 @@ Delete an [index](/guides/main_concepts/indexes.md).
 
 ### Example
 
-```bash
-$ curl \
-  -X DELETE 'http://localhost:7700/indexes/movie'
-```
+<code-samples id='delete_an_index_1' />
 
 #### Response: `204 No Content`
