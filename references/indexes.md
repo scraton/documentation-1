@@ -1,5 +1,7 @@
 # Indexes
 
+<code-samples id="add_or_replace_documents_1"/>
+
 An index is an entity that gathers a set of [documents](/guides/main_concepts/documents.md) with its own settings.
 
 [Learn more about indexes](/guides/main_concepts/indexes.md).
