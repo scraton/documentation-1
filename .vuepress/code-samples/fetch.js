@@ -48,23 +48,10 @@ function samplesToFiles(samples) {
   )
 }
 
-module.exports = () => {
-  return {
-    name: 'fetch-sample-files',
-    extendCli(cli) {
-      cli
-        .command(
-          'fetch-sample-files',
-          "fetches the sample files in MeiliSearch SDK's"
-        )
-        .action(async () => {
-          // since we can set our CLI function to be async, fetching is possible synchronously
-          log('Fetching sample files...')
-          const samples = await fetchSamples()
-          log('Sample files fetched.')
-          await samplesToFiles(samples)
-          log('Json sample file created.')
-        })
-    },
-  }
+module.exports = async () => {
+  log('Fetching sample files...')
+  const samples = await fetchSamples()
+  log('Sample files fetched.')
+  await samplesToFiles(samples)
+  log('Json sample file created.')
 }
