@@ -114,7 +114,7 @@ Updates in the settings route are **partial**. This means that any parameters no
 
 ### Example
 
-<code-samples id="update_settings_1"> /s
+<code-samples id="update_settings_1" />
 
 #### Response: `202 Accepted`
 
