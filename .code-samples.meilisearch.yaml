@@ -1,6 +1,6 @@
 get_one_index_1: |-
   $ curl \
-    -X GET 'http://localhost:7700/indexes/movies'
+  \t-X GET 'http://localhost:7700/indexes/movies'
 list_all_indexes_1: |-
   $ curl \
     -X GET 'http://localhost:7700/indexes'
