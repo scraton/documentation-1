@@ -1,7 +1,7 @@
 get_one_index_1: |-
   $ curl \
-  \t-X GET 'http://localhost:7700/indexes/movies'
-list_all_indexes_1: |-
+    -X GET 'http://localhost:7700/indexes/movies'
+list_all_indexes_1: |1-
   $ curl \
     -X GET 'http://localhost:7700/indexes'
 create_an_index_1: |-
@@ -21,43 +21,216 @@ delete_an_index_1: |-
   $ curl \
     -X DELETE 'http://localhost:7700/indexes/movie'
 get_one_document_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/documents/25684'
 get_documents_1: |-
-add_or_replace_documents_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/documents?limit=2'
+add_or_replace_documents_1: |-  
+  $ curl \
+    -X POST 'http://localhost:7700/indexes/movies/documents' \
+    --data '[{
+        "id": 287947,
+        "title": "Shazam",
+        "poster": "https://image.tmdb.org/t/p/w1280/xnopI5Xtky18MPhK40cZAGAOVeV.jpg",
+        "overview": "A boy is given the ability to become an adult superhero in times of need with a single magic word.",
+        "release_date": "2019-03-23"
+    }]'
 add_or_update_documents_1: |-
+  $ curl \
+    -X POST 'http://localhost:7700/indexes/movies/documents' \
+    -d 'primaryKey=movieskud'
+    --data '[{
+        "movieskud": 287947,
+        "title": "Shazam ⚡️"
+    }]'
 delete_all_documents_1: |-
+  curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/documents'
 delete_one_document_1: |-
+  curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/documents/25684'
 delete_documents_1: |-
+  curl \
+    -X POST 'http://localhost:7700/indexes/movies/delete-batch' \
+    --data '[
+        23488,
+        153738,
+        437035,
+        363869
+    ]'
 search_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/4eb345y7/search?q=american%20ninja%205'
 get_update_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/updates/1'
 get_all_updates_1: |-
-get_keys: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/updates'
+get_keys_1: |-
+  $ curl \
+    -H "X-Meili-API-Key: 123"
+    -X GET 'http://localhost:7700/keys'
 get_settings_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings'
 update_settings_1: |-
+  $ curl \
+    -X POST 'http://localhost:7700/indexes/movies/settings' \
+    --data '{
+        "rankingRules": [
+            "typo",
+            "words",
+            "proximity",
+            "attribute",
+            "wordsPosition",
+            "exactness",
+            "desc(release_date)",
+            "desc(rank)"
+        ],
+        "distinctAttribute": "movie_id",
+        "searchableAttributes": [
+            "uid",
+            "movie_id",
+            "title",
+            "description",
+            "poster",
+            "release_date",
+            "rank"
+        ],
+        "displayedAttributes": [
+            "title",
+            "description",
+            "poster",
+            "release_date",
+            "rank"
+        ],
+        "stopWords": [
+            "the",
+            "a",
+            "an"
+        ],
+        "synonyms": {
+            "wolverine": ["xmen", "logan"],
+            "logan": ["wolverine"]
+        },
+        "acceptNewFields": false
+    }'
 reset_settings_1: |-
+  $ curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/settings'
 get_synonyms_1: |-
+  curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/synonyms'
 update_synonyms_1: |-
+  curl \
+    -X POST 'http://localhost:7700/indexes/movies/settings/synonyms' \
+    --data '{
+      "wolverine": ["xmen", "logan"],
+      "logan": ["wolverine", "xmen"],
+      "wow": ["world of warcraft"]
+    }'
 reset_synonyms_1: |-
+  curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/settings/synonyms'
 get_stop_words_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/stop-words'
 update_stop_words_1: |-
+  $ curl \
+    -X POST 'http://localhost:7700/indexes/movies/settings/stop-words' \
+    --data '["the", "of", "to"]'
 reset_stop_words_1: |-
+  $ curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/settings/stop-words'
 get_ranking_rules_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/ranking-rules'
 update_ranking_rules_1: |-
+  $ curl \
+    -X POST 'http://localhost:7700/indexes/movies/settings/ranking-rules' \
+    --data '[
+        "typo",
+        "words",
+        "proximity",
+        "attribute",
+        "wordsPosition",
+        "exactness",
+        "asc(release_date)",
+        "desc(rank)"
+    ]'
 reset_ranking_rules_1: |-
+  $ curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/settings/ranking-rules'
 get_distinct_attribute_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/distinct-attribute'
 update_distinct_attribute_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/distinct-attribute' \
+    --data 'movie_id'
 reset_distinct_attribute_1: |-
+  $ curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/settings/distinct-attribute'
 get_searchable_attributes_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/searchable-attributes'
 update_searchable_attributes_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/searchable-attributes' \
+    --data '[
+        "title",
+        "description",
+        "uid"
+    ]'
 reset_searchable_attributes_1: |-
+  $ curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/settings/searchable-attributes'
 get_displayed_attributes_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/displayed-attributes'
 update_displayed_attributes_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/displayed-attributes' \
+    --data '[
+        "title",
+        "description",
+        "release_date",
+        "rank",
+        "poster"
+    ]'
 reset_displayed_attributes_1: |-
+  $ curl \
+    -X DELETE 'http://localhost:7700/indexes/movies/settings/displayed-attributes'
 get_accept_new_fields_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/accept-new-fields'
 update_accept_new_fields_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/settings/accept-new-fields' \
+    --data 'false'
 get_index_stats_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/indexes/movies/stats'
 get_indexes_stats_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/stats'
 get_health_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/health'
 update_health_1: |-
+  $ curl \
+    -X PUT 'http://localhost:7700/health' \
+    --data '{
+        "health": false
+    }'
 get_version_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/version'
 get_pretty_sys_info_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/sys-info/pretty
 get_sys_info_1: |-
+  $ curl \
+    -X GET 'http://localhost:7700/sys-info'
