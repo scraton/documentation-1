@@ -1,5 +1,10 @@
 [
   {
+    "language": "bash",
+    "label": "curl",
+    "url": "https://raw.githubusercontent.com/meilisearch/documentation/code-samples/.code-samples.meilisearch.yaml"
+  },
+  {
     "language": "javascript",
     "label": "javascript",
     "url": "https://raw.githubusercontent.com/meilisearch/meilisearch-js/code-samples/.code-samples.meilisearch.yaml"
