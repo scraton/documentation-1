@@ -1,10 +1,7 @@
 const vuepressmd = require('@vuepress/markdown')()
 
 function codeBlockWrapper(sample, language) {
-  return `\`\`\` ${language}
-   ${sample}
-   \`\`\`
-  `
+  return `\`\`\` ${language}\n${sample}\n\`\`\``
 }
 
 function renderCodeSample(sample, language) {
