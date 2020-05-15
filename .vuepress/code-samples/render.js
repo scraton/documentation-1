@@ -4,9 +4,12 @@ function codeBlockWrapper(sample, language) {
   return `\`\`\` ${language}\n${sample}\n\`\`\``
 }
 
-function renderCodeSample(sample, language) {
-  const wrappedSample = codeBlockWrapper(sample, language)
-  const htmlRender = vuepressmd.render(wrappedSample)
+function renderCodeSample({ sample, sampleId, language }) {
+  // if (!(sampleId.indexOf('_md') === sampleId.length - 3)) {
+  if (!sampleId.match(/.*_md$/)) {
+    sample = codeBlockWrapper(sample, language)
+  }
+  const htmlRender = vuepressmd.render(sample)
   return htmlRender.html
 }
 
@@ -27,10 +30,11 @@ module.exports = function(fetchedSamples) {
         {
           language: languageSample.language, // markdown code block language highlight ex: ```javascript ````
           label: languageSample.label, // name of the tab ex: curl
-          code: renderCodeSample(
-            languageSample.samples[sampleId],
-            languageSample.language
-          ), // code rendered in HTML
+          code: renderCodeSample({
+            sample: languageSample.samples[sampleId],
+            sampleId,
+            language: languageSample.language,
+          }), // code rendered in HTML
         },
       ]
     }
