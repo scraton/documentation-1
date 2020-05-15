@@ -10,11 +10,6 @@ Get version of MeiliSearch.
 
 <code-samples id="get_version_1" />
 
-```bash
-$ curl \
-  -X GET 'http://localhost:7700/version'
-```
-
 #### Response: `200 Ok`
 
 ```json
