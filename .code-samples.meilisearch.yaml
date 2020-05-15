@@ -238,4 +238,46 @@ distinct_attribute_guide_1: |-
   $ curl
     -X POST 'http://localhost:7700/indexes/jackets/settings' \
     --data '{ "distinctAttribute": "product_id" }'
-
+field_properties_guide_searchable_1: |-
+  $ curl \
+    -X POST 'http://localhost:7700/indexes/movies/settings' \
+    --data '{
+        "searchableAttributes": [
+            "uid",
+            "movie_id",
+            "title",
+            "description",
+            "poster",
+            "release_date",
+            "rank"
+        ]
+    }'
+field_properties_guide_displayed_1: |-
+  $ curl \
+    -X POST 'http://localhost:7700/indexes/movies/settings' \
+    --data '{
+        "displayedAttributes": [
+            "title",
+            "description",
+            "poster",
+            "release_date",
+            "rank"
+        ]
+    }'
+filtering_guide_1: |-
+  $ curl --get 'http://localhost:7700/indexes/movies/search' \
+      --data-urlencode 'q=Avengers' \
+      --data-urlencode 'filters=release_date > 795484800'
+filtering_guide_2: |-
+  $ curl --get 'http://localhost:7700/indexes/movies/search' \
+      --data-urlencode 'q=Batman' \
+      --data-urlencode 'filters=release_date > 795484800 AND (director = "Tim Burton" OR director = "Christopher Nolan"'
+filtering_guide_3: |-
+  $ curl --get 'http://localhost:7700/indexes/movies/search' \
+      --data-urlencode 'q=horror' \
+      --data-urlencode 'filters=director = "Jordan Peele"'
+filtering_guide_4: |-
+  $ curl --get 'http://localhost:7700/indexes/movies/search' \
+    --data-urlencode 'q=Planet of the Apes' \
+    --data-urlencode 'filters=rating >= 3 AND (NOT director = "Tim Burton")'
+    
