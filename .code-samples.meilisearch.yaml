@@ -280,4 +280,40 @@ filtering_guide_4: |-
   $ curl --get 'http://localhost:7700/indexes/movies/search' \
     --data-urlencode 'q=Planet of the Apes' \
     --data-urlencode 'filters=rating >= 3 AND (NOT director = "Tim Burton")'
-    
+search_parameter_guide_query_1: |-
+  $ curl -X GET -G 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu
+search_parameter_guide_offset_1: |-
+  $ curl -X GET -G 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu \
+    -d offset=1
+search_parameter_guide_limit_1: |-
+  $ curl -X GET -G 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu \
+    -d limit=2
+search_parameter_guide_retrieve_1: |-
+  $ curl -X GET -G 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu \
+    -d attributesToRetrieve=overview,title
+search_parameter_guide_crop_1: |-
+  $ curl -X GET -G 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu \
+    -d attributesToCrop=overview \
+    -d cropLength=10
+search_parameter_guide_highlight_1: |-
+  $ curl -X GET -G 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu \
+    -d attributesToHighlight=overview
+search_parameter_guide_filter_1: |-
+  $ curl --get 'http://localhost:7700/indexes/movies/search' \
+    -d q=n \
+    --data-urlencode filters='title = Nightshift'
+search_parameter_guide_filter_2: |-
+  $ curl --get 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu \
+    --data-urlencode filters='title="Kung Fu Panda"'
+search_parameter_guide_matches_1: |-
+  $ curl -X GET -G 'http://localhost:7700/indexes/movies/search' \
+    -d q=shifu \
+    -d attributesToHighlight=overview \
+    -d matches=true

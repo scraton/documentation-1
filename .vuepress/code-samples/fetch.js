@@ -5,8 +5,8 @@ const fs = require('fs')
 const chalk = require('chalk')
 
 /*
-* Pretty console log function
-*/
+ * Pretty console log function
+ */
 const log = (msg, color = 'FFB4E1', label = 'CODE-SAMPLE-FETCHER') => {
   console.log(`\n${chalk.reset.inverse.bold.hex(color)(` ${label} `)} ${msg}`)
 }
@@ -41,11 +41,14 @@ async function fetchSamples() {
       }
     } catch (e) {
       // Crashs are not thrown. File will be ignored and warning raised
-      log(`Warning: the sample file could not be fetched
+      log(
+        `Warning: the sample file could not be fetched
         SDK: ${sdk.label},
         url: ${sdk.url}
 
-        ${e.stack}`, '#FFA600')
+        ${e.stack}`,
+        '#FFA600'
+      )
     }
   })
   return await Promise.all(fetchPromises)
@@ -63,7 +66,7 @@ function samplesToFiles(samples) {
 
 module.exports = async () => {
   log('Fetching sample files...')
-  const samples = (await fetchSamples()).filter(sample => sample)
+  const samples = (await fetchSamples()).filter((sample) => sample)
   log('Sample files fetched.')
   await samplesToFiles(samples)
   log('Json sample file created.')
