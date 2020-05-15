@@ -2,8 +2,6 @@
 
 This quick tour will help you get started with MeiliSearch in only a few steps.
 
-<code-samples id="getting_started_create_index_md" />
-
 ## Download and launch
 
 First of all, let's run MeiliSearch.
