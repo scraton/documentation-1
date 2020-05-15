@@ -4,6 +4,8 @@ const bent = require('bent')
 const fs = require('fs')
 const chalk = require('chalk')
 
+const NODE_ENV = process.env.NODE_ENV || 'development'
+
 /*
  * Pretty console log function
  */
@@ -27,8 +29,26 @@ function sampleYamlToJs(body, sdk) {
   }
 }
 
+/*
+ * Fetches only cURL samples from local directory
+ */
+function fetchLocalSamples() {
+  const cURLPath = `${process.cwd()}/.code-samples.meilisearch.yaml`
+  const curlSamples = fs.readFileSync(cURLPath, 'utf-8')
+  return [
+    {
+      samples: sampleYamlToJs(curlSamples, {
+        url: cURLPath,
+        label: 'cURL',
+      }),
+      language: 'bash',
+      label: 'cURL',
+    },
+  ]
+}
+
 /**
- * Fetches all yaml file based on a list of url's
+ * Fetches all yaml file based on a list of SDK repositories URL's
  */
 async function fetchSamples() {
   const fetchPromises = sdks.map(async (sdk) => {
@@ -66,7 +86,9 @@ function samplesToFiles(samples) {
 
 module.exports = async () => {
   log('Fetching sample files...')
-  const samples = (await fetchSamples()).filter((sample) => sample)
+  let samples = {}
+  if (NODE_ENV === 'development') samples = fetchLocalSamples()
+  else samples = (await fetchSamples()).filter((sample) => sample)
   log('Sample files fetched.')
   await samplesToFiles(samples)
   log('Json sample file created.')
