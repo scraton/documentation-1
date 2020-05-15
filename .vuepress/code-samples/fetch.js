@@ -79,7 +79,7 @@ async function fetchSamples() {
  */
 function samplesToFiles(samples) {
   fs.writeFileSync(
-    `${__dirname}/samples.json`,
+    `${__dirname}/generated-samples.json`,
     JSON.stringify(samples, null, 2)
   )
 }
@@ -87,9 +87,13 @@ function samplesToFiles(samples) {
 module.exports = async () => {
   log('Fetching sample files...')
   let samples = {}
-  if (NODE_ENV === 'development') samples = fetchLocalSamples()
-  else samples = (await fetchSamples()).filter((sample) => sample)
-  log('Sample files fetched.')
+  if (NODE_ENV === 'development') {
+    samples = fetchLocalSamples()
+    log('Fetched local cURL file.')
+  } else {
+    samples = (await fetchSamples()).filter((sample) => sample)
+    log(`Fetched sample files of: \n\t${samples.map((sample) => sample.label).join('\n\t')}\n`)
+  }
   await samplesToFiles(samples)
   log('Json sample file created.')
 }

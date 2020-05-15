@@ -3,7 +3,6 @@ const renderSamples = require('./render')
 const fetchSamples = require('./fetch')
 
 module.exports = function() {
-  const samples = require('./samples.json')
   return {
     name: 'fetch-sample-files',
     extendCli(cli) {
@@ -15,6 +14,7 @@ module.exports = function() {
         .action(fetchSamples)
     },
     define() {
+      const samples = require('./generated-samples.json')
       return {
         CODE_SAMPLES: renderSamples(samples),
       }
